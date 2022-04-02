@@ -9,13 +9,13 @@ Criteria need:
 *  When I search for a city, I am presented with current & future conditions for that city. 
 *  That city is then added to the seach history
 *  I am presented with:
-  * city name
-  * the date
-  * an icon representation of weather conditions
-  * the temperature
-  * the humidity 
-  * the wind speed
-  * the UV index
+     * city name
+     * the date
+     * an icon representation of weather conditions
+     * the temperature
+     * the humidity 
+     * the wind speed
+     * the UV index
 * When viewing the UV index, I am presented with a color that indicated whether the conditions are favorable, moderate, or severe
 * When I click on a city in the seach history, I am presented with weather coniditons. 
 

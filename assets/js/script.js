@@ -46,29 +46,40 @@ function fetchFutureForecast (longitude, latitude) {
     var queryOneCallURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + '&lon=' + longitude + '&exclude=minutely,hourly&units=imperial&appid=' + APIKey; 
 
     fetch(queryOneCallURL)
-        .then(function (response1) {
-            console.log(response1)
-            return response1.json ();
+        .then(function (response) {
+            console.log(response)
+            return response.json ();
         })
-        .then(function (data1) {
-            console.log(data1)
+        .then(function (data) {
+            console.log(data)
 
-            var UVIndex = data1.current.uvi;
+            var UVIndex = data.current.uvi;
             console.log(UVIndex);
 
             document.querySelector('.uv').innerText = UVIndex;
 
-            // var futureTemp = data1.daily[i].temp.day;
-            // var futureHumidity = data1.daily[i].humidity;
-            // var futureWindSpeed = data1.daily[i].wind_speed;
-            // var futureIcon = data1.daily[i].weather[0].icon;
+            for (var i = 1; i < 6; i++) {
+                var futureDay = data.daily[i].dt;
+                var futureTemp = data.daily[i].temp.day;
+                var futureHumidity = data.daily[i].humidity;
+                var futureWindSpeed = data.daily[i].wind_speed;
+                var futureIcon = data.daily[i].weather[0].icon;
 
-            // console.log(futureTemp);
-            // console.log(futureHumidity);
-            // console.log(futureWindSpeed); 
-            // console.log(futureIcon);
+                var headerEl = document.createElement('h2');
+                var imageEl = document.createElement('image');
+                var ulEl = document.createElement('ul');
+                var liEl = document.createElement('li');
 
-            // for (var i = 1; i < 6; i++) {
+                headerEl.innerHTML = 
+                document.getElementById(day).appendChild();
+
+                console.log(futureDay, futureTemp, futureHumidity, futureWindSpeed, futureIcon);
+
+
+
+
+            }
+
 
 
         })

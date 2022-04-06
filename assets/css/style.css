@@ -43,7 +43,6 @@ body {
     text-align: center; 
     justify-content: center;
     height: 100vh;
-
 }
 
 .weather-box {
@@ -54,9 +53,7 @@ body {
     text-align: center;
     align-items: center;
     justify-content: center;
-    
 }
-
 
 .conditions {
     list-style-type: none;

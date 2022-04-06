@@ -58,32 +58,55 @@ function fetchFutureForecast (longitude, latitude) {
 
             document.querySelector('.uv').innerText = UVIndex;
 
-            for (var i = 1; i < 6; i++) {
+            for (var i = 1; i < 3; i++) {
                 var futureDay = data.daily[i].dt;
                 var futureTemp = data.daily[i].temp.day;
                 var futureHumidity = data.daily[i].humidity;
                 var futureWindSpeed = data.daily[i].wind_speed;
                 var futureIcon = data.daily[i].weather[0].icon;
 
-                var headerEl = document.createElement('h2');
-                var imageEl = document.createElement('image');
-                var ulEl = document.createElement('ul');
-                var liEl = document.createElement('li');
-
-                headerEl.innerHTML = 
-                document.getElementById(day).appendChild();
-
                 console.log(futureDay, futureTemp, futureHumidity, futureWindSpeed, futureIcon);
 
+                var futureDayData = [futureDay];
+                var futureTempData = [futureTemp]
+                var futureHumidityData =[futureHumidity]
+                var futureWindSpeedData = [futureWindSpeed]
+                var futureIconData = [futureIcon]
+                var allFutureArry = [futureDayData, futureTempData, futureHumidityData, futureWindSpeedData, futureIconData]
 
-
-
+                console.log(futureDayData, futureTempData, futureHumidityData, futureWindSpeedData, futureIconData);
+                console.log(allFutureArry);
             }
-
-
-
+            
+            displayFutureForcast(futureDayData, futureTempData, futureHumidityData, futureWindSpeedData, futureIconData);
         })
 }
+
+function displayFutureForcast (futureDayData, futureTempData, futureHumidityData, futureWindSpeedData, futureIconData) {
+
+    document.querySelector('.future-date-1').innerText = futureDayData[0];
+    document.querySelector('.future-temp-1').innerText = futureTempData[0] + ' °F';
+    document.querySelector('.future-humidity-1').innerText = futureHumidityData[0] + ' %';
+    document.querySelector('.future-wind-speed-1').innerText = futureWindSpeedData[0] + ' mph';
+    document.querySelector('.future-weather-icon-1').src = 'http://openweathermap.org/img/wn/' + futureIconData[0] + '@2x.png';
+
+    document.querySelector('.future-date-2').innerText = futureDayData[1];
+    document.querySelector('.future-temp-2').innerText = futureTempData[1] + ' °F';
+    document.querySelector('.future-humidity-2').innerText = futureHumidityData[1] + ' %';
+    document.querySelector('.future-wind-speed-2').innerText = futureWindSpeedData[1] + ' mph';
+    document.querySelector('.future-weather-icon-2').src = 'http://openweathermap.org/img/wn/' + futureIconData[1] + '@2x.png';
+
+    document.querySelector('.future-date-3').innerText = futureDayData[2];
+    document.querySelector('.future-temp-3').innerText = futureTempData[2] + ' °F';
+    document.querySelector('.future-humidity-3').innerText = futureHumidityData[2] + ' %';
+    document.querySelector('.future-wind-speed-3').innerText = futureWindSpeedData[2] + ' mph';
+    document.querySelector('.future-weather-icon-3').src = 'http://openweathermap.org/img/wn/' + futureIconData[2] + '@2x.png';
+}              
+
+
+
+            
+        
 
 // function fetchWeather
 var saveButtonEl = $('.search-button');

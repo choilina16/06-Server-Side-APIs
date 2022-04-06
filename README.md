@@ -20,6 +20,7 @@ Criteria need:
 * When I click on a city in the seach history, I am presented with weather coniditons. 
 
 ## Visuals to Personal Deployed Page
+[06-Server-Side-APIs-Lina.pdf](https://github.com/choilina16/06-Server-Side-APIs/files/8423374/06-Server-Side-APIs-Lina.pdf)
 
 
 ## Link to Deployed Page

@@ -1,15 +1,13 @@
-var cityEl = $('.city');
-var currentTempEl = $('.current-temp');
-var humidityEl = $('.humidity');
-var windSpeedEl = $('.wind-speed');
-var weatherIconEl = $('.weather-icon');
-
+// Current date to be displayed
+var today = moment();
+$('.current-date').text(today.format('L'));
 
 var APIKey = '66d73560f989570188d6abc55a3ce4cd';
 
 function fetchWeather () {
     var city = $('.city-name').val();
     var queryCurrentWeatherURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=' + APIKey;
+
     // .then is already calling the function
     fetch(queryCurrentWeatherURL)
         .then(function (response) {
@@ -19,61 +17,63 @@ function fetchWeather () {
         })
          // data represents output from json
         .then(function(data) {
-            // console.log(data);
-
-            // futureForecast();
+            console.log(data);
 
             var cityName = data.name;
             var temperature = data.main.temp;
             var humidity = data.main.humidity;
             var windSpeed = data.wind.speed;
-            var icon = data.weather[0];
+            var icon = data.weather[0].icon;
             var longitude = data.coord.lon;
             var latitude = data.coord.lat;
+            var currentForecast = [cityName, temperature, humidity, windSpeed, icon, longitude, latitude]
 
-            console.log(cityName);
-            console.log(temperature);
-            console.log(humidity);
-            console.log(windSpeed);
-            console.log(icon);
-            console.log(longitude);
-            console.log(latitude);   
+            console.log(currentForecast);
 
-            cityEl.innerText = cityName;
-            currentTempEl.innerText = temperature;
-            humidityEl.innerText = humidity;
-            windSpeedEl.innerText = windSpeed;
-            weatherIconEl.src='http://openweathermap.org/img/wn/' + icon + '@2x.png';
-        
-            console.log(cityEl, currentTempEl, humidityEl, windSpeedEl);
+            document.querySelector('.city').innerText = cityName;
+            document.querySelector('.current-temp').innerText = temperature + ' °F';
+            document.querySelector('.humidity').innerText = humidity + ' %';
+            document.querySelector('.wind-speed').innerText = windSpeed + ' mph';
+            document.querySelector('.weather-icon').src = 'http://openweathermap.org/img/wn/' + icon + '@2x.png';
 
-        })
-}
+            fetchFutureForecast(currentForecast[5], currentForecast[6]);
+        })    
+}        
 
-function futureForecast () {
+// https://api.openweathermap.org/data/2.5/onecall?lat=39.7392&lon=-104.9847&exclude=minutely,hourly&units=imperial&appid=66d73560f989570188d6abc55a3ce4cd
 
-    // current.uvi
-
-    var queryOneCallURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + '&lon=' + longitude + '&exclude={part}&appid=' + APIKey; 
-
-    // fetchWeather();
+function fetchFutureForecast (longitude, latitude) {
+    var queryOneCallURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + '&lon=' + longitude + '&exclude=minutely,hourly&units=imperial&appid=' + APIKey; 
 
     fetch(queryOneCallURL)
-        .then(function (response) {
-            console.log(response);
-            return response.json ();
+        .then(function (response1) {
+            console.log(response1)
+            return response1.json ();
         })
-        .then(function(data) {
-            console.log(data);
+        .then(function (data1) {
+            console.log(data1)
+
+            var UVIndex = data1.current.uvi;
+            console.log(UVIndex);
+
+            document.querySelector('.uv').innerText = UVIndex;
+
+            // var futureTemp = data1.daily[i].temp.day;
+            // var futureHumidity = data1.daily[i].humidity;
+            // var futureWindSpeed = data1.daily[i].wind_speed;
+            // var futureIcon = data1.daily[i].weather[0].icon;
+
+            // console.log(futureTemp);
+            // console.log(futureHumidity);
+            // console.log(futureWindSpeed); 
+            // console.log(futureIcon);
+
+            // for (var i = 1; i < 6; i++) {
+
+
         })
 }
 
 // function fetchWeather
 var saveButtonEl = $('.search-button');
-saveButtonEl.on('click', futureForecast);
-
-
-
-
-
-
+saveButtonEl.on('click', fetchWeather);

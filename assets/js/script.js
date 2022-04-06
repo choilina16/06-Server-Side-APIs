@@ -91,7 +91,7 @@ function fetchFutureForecast (longitude, latitude) {
 
 function displayFutureForcast (futureDayData, futureTempData, futureHumidityData, futureWindSpeedData, futureIconData) {
 
-    // hard coding info from for loop to the page for day 1
+    // hard coding info from for loop to the page for day 1 --hey but one day is still condidered the future right? hehe
     document.querySelector('.future-date-1').innerText = futureDayData[0];
     document.querySelector('.future-temp-1').innerText = futureTempData[0] + ' °F';
     document.querySelector('.future-humidity-1').innerText = futureHumidityData[0] + ' %';
@@ -116,3 +116,14 @@ function displayFutureForcast (futureDayData, futureTempData, futureHumidityData
 // function fetchWeather
 var saveButtonEl = $('.search-button');
 saveButtonEl.on('click', fetchWeather);
+
+// saving user input into local storage 
+var city = $('.city-name').val();
+localStorage.setItem("cityInput", city);
+
+function renderSearchHistory () {
+    var seachHistory = localStorage.getItem("cityInput");
+
+    
+
+}

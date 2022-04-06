@@ -19,6 +19,7 @@ function fetchWeather () {
         .then(function(data) {
             console.log(data);
 
+            // pulling out data from API
             var cityName = data.name;
             var temperature = data.main.temp;
             var humidity = data.main.humidity;
@@ -30,6 +31,7 @@ function fetchWeather () {
 
             console.log(currentForecast);
 
+            // displaying to page 
             document.querySelector('.city').innerText = cityName;
             document.querySelector('.current-temp').innerText = temperature + ' °F';
             document.querySelector('.humidity').innerText = humidity + ' %';
@@ -55,10 +57,12 @@ function fetchFutureForecast (longitude, latitude) {
 
             var UVIndex = data.current.uvi;
             console.log(UVIndex);
-
+            
+            // getting the uv index for current weather
             document.querySelector('.uv').innerText = UVIndex;
 
-            for (var i = 1; i < 3; i++) {
+            // for loop to get data out from each day
+            for (var i = 1; i < 4; i++) {
                 var futureDay = data.daily[i].dt;
                 var futureTemp = data.daily[i].temp.day;
                 var futureHumidity = data.daily[i].humidity;
@@ -67,46 +71,47 @@ function fetchFutureForecast (longitude, latitude) {
 
                 console.log(futureDay, futureTemp, futureHumidity, futureWindSpeed, futureIcon);
 
+                // var array = [futureDay, futureTemp, futureHumidity, futureWindSpeed, futureIcon];
+                // console.log(array);
+
+                // putting info from for loop to arrays so i can pass to next function
                 var futureDayData = [futureDay];
                 var futureTempData = [futureTemp]
                 var futureHumidityData =[futureHumidity]
                 var futureWindSpeedData = [futureWindSpeed]
                 var futureIconData = [futureIcon]
-                var allFutureArry = [futureDayData, futureTempData, futureHumidityData, futureWindSpeedData, futureIconData]
 
                 console.log(futureDayData, futureTempData, futureHumidityData, futureWindSpeedData, futureIconData);
-                console.log(allFutureArry);
+
             }
-            
+            // passing the values of these array to the next function
             displayFutureForcast(futureDayData, futureTempData, futureHumidityData, futureWindSpeedData, futureIconData);
         })
 }
 
 function displayFutureForcast (futureDayData, futureTempData, futureHumidityData, futureWindSpeedData, futureIconData) {
 
+    // hard coding info from for loop to the page for day 1
     document.querySelector('.future-date-1').innerText = futureDayData[0];
     document.querySelector('.future-temp-1').innerText = futureTempData[0] + ' °F';
     document.querySelector('.future-humidity-1').innerText = futureHumidityData[0] + ' %';
     document.querySelector('.future-wind-speed-1').innerText = futureWindSpeedData[0] + ' mph';
     document.querySelector('.future-weather-icon-1').src = 'http://openweathermap.org/img/wn/' + futureIconData[0] + '@2x.png';
 
+    // hard coding info from for loop to the page for day 2 -- DOES NOT WORK!!
     document.querySelector('.future-date-2').innerText = futureDayData[1];
     document.querySelector('.future-temp-2').innerText = futureTempData[1] + ' °F';
     document.querySelector('.future-humidity-2').innerText = futureHumidityData[1] + ' %';
     document.querySelector('.future-wind-speed-2').innerText = futureWindSpeedData[1] + ' mph';
     document.querySelector('.future-weather-icon-2').src = 'http://openweathermap.org/img/wn/' + futureIconData[1] + '@2x.png';
 
+      // hard coding info from for loop to the page for day 3 -- DOES NOT WORK!!
     document.querySelector('.future-date-3').innerText = futureDayData[2];
     document.querySelector('.future-temp-3').innerText = futureTempData[2] + ' °F';
     document.querySelector('.future-humidity-3').innerText = futureHumidityData[2] + ' %';
     document.querySelector('.future-wind-speed-3').innerText = futureWindSpeedData[2] + ' mph';
     document.querySelector('.future-weather-icon-3').src = 'http://openweathermap.org/img/wn/' + futureIconData[2] + '@2x.png';
-}              
-
-
-
-            
-        
+}
 
 // function fetchWeather
 var saveButtonEl = $('.search-button');
